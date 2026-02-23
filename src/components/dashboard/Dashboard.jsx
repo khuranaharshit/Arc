@@ -2,6 +2,7 @@ import { TodayXP } from './TodayXP';
 import { StreakCard } from './StreakCard';
 import { LevelCard } from './LevelCard';
 import { QuestCard } from './QuestCard';
+import { ChallengeCard } from './ChallengeCard';
 import { QuickLog } from './QuickLog';
 import { BrainBite } from './BrainBite';
 import { DidYouKnow } from './DidYouKnow';
@@ -33,9 +34,10 @@ export function Dashboard() {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <QuestCard />
-        <NudgeCard />
+        <ChallengeCard />
       </div>
 
+      <NudgeCard />
       <QuickLog />
 
       <div className="grid gap-4 sm:grid-cols-2">

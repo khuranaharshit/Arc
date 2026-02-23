@@ -16,6 +16,7 @@ import { PeopleDAO } from '../dao/PeopleDAO';
 import { FinanceDAO } from '../dao/FinanceDAO';
 import { TravelDAO } from '../dao/TravelDAO';
 import { QuestDAO } from '../dao/QuestDAO';
+import { ChallengeDAO } from '../dao/ChallengeDAO';
 import { ConfigLoader } from '../dao/ConfigLoader';
 
 const DataContext = createContext(null);
@@ -58,6 +59,7 @@ export function DataProvider({ children }) {
         financeDAO: new FinanceDAO(localCache, syncEngine),
         travelDAO: new TravelDAO(localCache, syncEngine),
         questDAO: new QuestDAO(localCache, syncEngine),
+        challengeDAO: new ChallengeDAO(localCache, syncEngine),
       };
 
       const [xpMenu, levels, streaks, achievements, readingList, nudges] = await Promise.all([

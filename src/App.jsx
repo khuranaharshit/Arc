@@ -58,12 +58,6 @@ function AppRoutes() {
 function AuthGate() {
   const { isAuthed } = useAuth();
 
-  // In dev mode, skip auth gate — use localStorage directly
-  if (import.meta.env.DEV) {
-    return <AppRoutes />;
-  }
-
-  // In production, require auth
   if (!isAuthed) {
     return <LoginScreen />;
   }
