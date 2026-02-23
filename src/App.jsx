@@ -27,7 +27,7 @@ import { SettingsPage } from './components/settings/SettingsPage';
 function AppRoutes() {
   return (
     <DataProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/Arc">
         <Routes>
           <Route element={<AppShell />}>
             <Route index element={<Dashboard />} />

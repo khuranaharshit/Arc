@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  base: '/Arc/',
   plugins: [
     react(),
     VitePWA({
@@ -12,7 +13,7 @@ export default defineConfig({
         name: 'Arc — Growth Tracker',
         short_name: 'Arc',
         description: 'Gamified personal growth tracker',
-        start_url: '/',
+        start_url: '/Arc/',
         display: 'standalone',
         background_color: '#0f172a',
         theme_color: '#8b5cf6',
