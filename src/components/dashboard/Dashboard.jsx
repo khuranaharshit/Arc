@@ -6,6 +6,7 @@ import { BrainBite } from './BrainBite';
 import { DidYouKnow } from './DidYouKnow';
 import { CalibrationCard } from './CalibrationCard';
 import { MentalModelCard } from './MentalModelCard';
+import { NudgeCard } from './NudgeCard';
 import { RecentActivity } from './RecentActivity';
 
 function getGreeting() {
@@ -27,6 +28,7 @@ export function Dashboard() {
         <StreakCard />
         <LevelCard />
       </div>
+      <NudgeCard />
       <QuickLog />
       <div className="grid gap-4 sm:grid-cols-2">
         <BrainBite />
