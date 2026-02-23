@@ -33,3 +33,6 @@ yarn-error.log*
 
 # Testing
 coverage/
+
+# Local data (dev-server.js filesystem storage)
+/data/

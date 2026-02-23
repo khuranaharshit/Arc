@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { LocalCacheStorage } from '../storage/LocalCacheStorage';
 import { SyncEngine } from '../storage/SyncEngine';
+import { DevStorage } from '../storage/DevStorage';
 import { ActivityDAO } from '../dao/ActivityDAO';
 import { StreakDAO } from '../dao/StreakDAO';
 import { LevelDAO } from '../dao/LevelDAO';
@@ -13,19 +14,45 @@ import { ConfigLoader } from '../dao/ConfigLoader';
 const DataContext = createContext(null);
 
 /**
- * Initializes all DAOs with localStorage storage (GitHub added later via auth).
+ * Initializes all DAOs with localStorage + optional DevStorage/GitHubStorage.
+ * In dev mode, auto-detects if dev-server.js is running and syncs to filesystem.
  * Provides config + DAOs to the entire app.
  */
 export function DataProvider({ children }) {
   const [ready, setReady] = useState(false);
   const [config, setConfig] = useState(null);
+  const [storageMode, setStorageMode] = useState('local'); // 'local' | 'dev' | 'github'
   const daosRef = useRef(null);
 
   useEffect(() => {
     async function init() {
-      // Create storage + sync
       const localCache = new LocalCacheStorage();
-      const syncEngine = new SyncEngine(localCache, null); // no GitHub yet
+
+      // In dev mode, check if dev-server.js is running
+      let remoteStorage = null;
+      if (import.meta.env.DEV) {
+        const devStorage = new DevStorage('http://localhost:3001');
+        const devAvailable = await devStorage.isAvailable();
+        if (devAvailable) {
+          remoteStorage = devStorage;
+          setStorageMode('dev');
+          console.log('[Arc] Dev storage server detected — syncing to ./data/ files');
+        } else {
+          console.log('[Arc] No dev storage server — using localStorage only');
+          console.log('[Arc] To enable file sync: node dev-server.js');
+        }
+      }
+
+      const syncEngine = new SyncEngine(localCache, remoteStorage);
+
+      // If dev storage is available, pull existing data from files
+      if (remoteStorage) {
+        try {
+          await syncEngine.fullPull();
+        } catch (err) {
+          console.warn('[Arc] Initial pull from dev storage failed:', err);
+        }
+      }
 
       // Create DAOs
       const activityDAO = new ActivityDAO(localCache, syncEngine);
@@ -64,14 +91,14 @@ export function DataProvider({ children }) {
 
     init().catch((err) => {
       console.error('DataProvider init failed:', err);
-      setReady(true); // still render app, just without data
+      setReady(true);
     });
   }, []);
 
-  if (!ready) return null; // or loading screen
+  if (!ready) return null;
 
   return (
-    <DataContext.Provider value={{ ...daosRef.current, config }}>
+    <DataContext.Provider value={{ ...daosRef.current, config, storageMode }}>
       {children}
     </DataContext.Provider>
   );
