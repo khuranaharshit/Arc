@@ -18,49 +18,33 @@ export function QuickLog() {
   const handleLog = (action) => {
     const isCrit = Math.random() < 0.1;
     const xp = isCrit ? action.xp * 2 : action.xp;
-    addToast(
-      `${isCrit ? 'CRITICAL HIT! ' : ''}+${xp} XP — ${action.label}`,
-      'xp',
-      3000,
-    );
+    addToast(`${isCrit ? 'CRITICAL HIT! ' : ''}+${xp} XP — ${action.label}`, 'xp');
   };
 
   return (
     <Card>
-      <CardHeader
-        title="Quick Log"
-        icon={Plus}
-        action={
-          <button
-            onClick={() => navigate('/log')}
-            className="text-xs font-medium text-purple-400 hover:text-purple-300 transition-colors"
-          >
-            View all
-          </button>
-        }
-      />
+      <CardHeader title="Quick Log" icon={Plus}
+        action={<button onClick={() => navigate('/log')} className="text-xs font-medium text-purple-400 hover:text-purple-300 transition-colors">View all</button>} />
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
         {QUICK_ACTIONS.map((action) => {
           const Icon = action.icon;
           return (
-            <button
-              key={action.key}
-              className="group flex flex-col items-center gap-1.5 rounded-2xl border border-white/[0.06] bg-white/[0.03] p-3 transition-all hover:bg-white/[0.06] hover:border-white/10 hover:scale-[1.03] active:scale-[0.97]"
-              onClick={() => handleLog(action)}
-            >
+            <button key={action.key}
+              className="group flex flex-col items-center gap-1.5 rounded-2xl border p-3 transition-all hover:scale-[1.03] active:scale-[0.97]"
+              style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface-row)' }}
+              onClick={() => handleLog(action)}>
               <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${action.gradient} shadow-lg`}>
                 <Icon className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xs font-medium text-white/60 group-hover:text-white/80">{action.label}</span>
-              <span className="text-[10px] text-white/25">+{action.xp} XP</span>
+              <span className="text-xs font-medium t-tertiary group-hover:t-secondary">{action.label}</span>
+              <span className="text-[10px] t-faint">+{action.xp} XP</span>
             </button>
           );
         })}
-        <button
-          onClick={() => navigate('/log')}
-          className="flex flex-col items-center gap-1.5 rounded-2xl border border-dashed border-white/10 p-3 text-white/20 transition-all hover:border-white/20 hover:text-white/40"
-        >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-dashed border-white/10">
+        <button onClick={() => navigate('/log')}
+          className="flex flex-col items-center gap-1.5 rounded-2xl border border-dashed p-3 t-faint transition-all hover:t-muted"
+          style={{ borderColor: 'var(--color-border)' }}>
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-dashed" style={{ borderColor: 'var(--color-border)' }}>
             <Plus className="h-5 w-5" />
           </div>
           <span className="text-xs font-medium">More</span>

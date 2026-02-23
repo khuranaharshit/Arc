@@ -15,8 +15,8 @@ export function CardHeader({ title, subtitle, icon: Icon, action }) {
       <div className="flex items-center gap-2">
         {Icon && <Icon className="h-5 w-5 text-purple-400" />}
         <div>
-          <h3 className="text-sm font-semibold text-white/90">{title}</h3>
-          {subtitle && <p className="text-[11px] text-white/30">{subtitle}</p>}
+          <h3 className="text-sm font-semibold t-primary">{title}</h3>
+          {subtitle && <p className="text-[11px] t-muted">{subtitle}</p>}
         </div>
       </div>
       {action && <div>{action}</div>}

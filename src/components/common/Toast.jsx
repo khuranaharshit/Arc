@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { CheckCircle, AlertCircle, Info, X, Zap } from 'lucide-react';
 
 const icons = { success: CheckCircle, error: AlertCircle, info: Info, xp: Zap };
@@ -19,15 +19,24 @@ const iconColors = {
 
 export function Toast({ message, type = 'info', onClose, duration = 3000 }) {
   const [visible, setVisible] = useState(true);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
   const Icon = icons[type];
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const fadeTimer = setTimeout(() => {
       setVisible(false);
-      setTimeout(onClose, 300);
     }, duration);
-    return () => clearTimeout(timer);
-  }, [duration, onClose]);
+
+    const removeTimer = setTimeout(() => {
+      onCloseRef.current();
+    }, duration + 300);
+
+    return () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(removeTimer);
+    };
+  }, [duration]);
 
   return (
     <div
@@ -36,8 +45,8 @@ export function Toast({ message, type = 'info', onClose, duration = 3000 }) {
       }`}
     >
       <Icon className={`h-5 w-5 flex-shrink-0 ${iconColors[type]}`} />
-      <p className="flex-1 text-sm font-medium text-white/80">{message}</p>
-      <button onClick={onClose} className="text-white/25 hover:text-white/50">
+      <p className="flex-1 text-sm font-medium t-secondary">{message}</p>
+      <button onClick={onClose} className="t-muted hover:t-secondary">
         <X className="h-4 w-4" />
       </button>
     </div>

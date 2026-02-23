@@ -14,9 +14,9 @@ export function Header() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-40 flex h-14 items-center justify-between border-b px-4 backdrop-blur-xl md:pl-60"
-        style={{ background: 'rgba(10, 10, 15, 0.8)', borderColor: 'var(--color-border)' }}>
+        style={{ background: 'var(--header-bg)', borderColor: 'var(--color-border)' }}>
         <button
-          className="rounded-xl p-2 text-white/40 hover:bg-white/5 hover:text-white/70 md:hidden"
+          className="rounded-xl p-2 t-muted hover:t-secondary md:hidden"
           onClick={() => setMobileMenuOpen(true)}
         >
           <Menu className="h-5 w-5" />
@@ -29,16 +29,14 @@ export function Header() {
         <div className="hidden md:block" />
 
         <div className="flex items-center gap-1">
-          {/* Theme toggle */}
           <button
             onClick={toggleTheme}
-            className="rounded-xl p-2 text-white/40 transition-colors hover:bg-white/5 hover:text-white/70"
+            className="rounded-xl p-2 t-muted transition-colors hover:t-secondary"
             title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
             {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
 
-          {/* Sync status */}
           <button
             className={`flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 text-xs font-medium transition-colors ${
               syncStatus === 'idle'
@@ -62,28 +60,21 @@ export function Header() {
 
           <button
             onClick={() => navigate('/settings')}
-            className="rounded-xl p-2 text-white/40 transition-colors hover:bg-white/5 hover:text-white/70"
+            className="rounded-xl p-2 t-muted transition-colors hover:t-secondary"
           >
             <Settings className="h-4 w-4" />
           </button>
         </div>
       </header>
 
-      {/* Mobile slide-out menu */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
-          <div
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-            onClick={() => setMobileMenuOpen(false)}
-          />
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
           <div className="absolute inset-y-0 left-0 w-72 shadow-2xl animate-slide-up"
             style={{ background: 'var(--color-surface-solid)' }}>
             <div className="flex items-center justify-between border-b px-4 py-3" style={{ borderColor: 'var(--color-border)' }}>
               <span className="text-lg font-bold text-gradient">Arc</span>
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="rounded-xl p-1.5 text-white/40 hover:text-white/70"
-              >
+              <button onClick={() => setMobileMenuOpen(false)} className="rounded-xl p-1.5 t-muted hover:t-secondary">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -97,11 +88,10 @@ export function Header() {
                     onClick={() => setMobileMenuOpen(false)}
                     className={({ isActive }) =>
                       `flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
-                        isActive
-                          ? 'bg-purple-500/15 text-purple-400'
-                          : 'text-white/40 hover:bg-white/5 hover:text-white/70'
+                        isActive ? 'bg-purple-500/15 text-purple-400' : 't-tertiary hover:t-secondary'
                       }`
                     }
+                    style={({ isActive }) => !isActive ? { background: 'transparent' } : {}}
                   >
                     {Icon && <Icon className="h-4 w-4" />}
                     {item.label}

@@ -19,28 +19,23 @@ export function Dashboard() {
   return (
     <div className="space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold text-white">{getGreeting()}</h1>
-        <p className="text-sm text-white/30">Let's earn some XP today.</p>
+        <h1 className="text-2xl font-bold t-primary">{getGreeting()}</h1>
+        <p className="text-sm t-muted">Let's earn some XP today.</p>
       </div>
-
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <TodayXP />
         <StreakCard />
         <LevelCard />
       </div>
-
       <QuickLog />
-
       <div className="grid gap-4 sm:grid-cols-2">
         <BrainBite />
         <CalibrationCard />
       </div>
-
       <div className="grid gap-4 sm:grid-cols-2">
         <DidYouKnow />
         <MentalModelCard />
       </div>
-
       <RecentActivity />
     </div>
   );
