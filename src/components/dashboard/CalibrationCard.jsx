@@ -1,25 +1,60 @@
-import { useState } from 'react';
-import { Target, CheckCircle, XCircle } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { Target, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
 import { Card, CardHeader } from '../common/Card';
 import { useToast } from '../../context/ToastContext';
+import { ConfigLoader } from '../../dao/ConfigLoader';
 
-const Q = { statement: 'The Great Wall of China is visible from space with the naked eye', answer: false, source: 'NASA has confirmed it is not visible from low Earth orbit without aid' };
 const LEVELS = [50, 60, 70, 80, 90, 100];
 
+function pickRandom(arr, exclude = -1) {
+  let idx;
+  do { idx = Math.floor(Math.random() * arr.length); } while (idx === exclude && arr.length > 1);
+  return idx;
+}
+
 export function CalibrationCard() {
+  const [questions, setQuestions] = useState([]);
+  const [qIdx, setQIdx] = useState(0);
   const [confidence, setConfidence] = useState(null);
   const [guess, setGuess] = useState(null);
   const [revealed, setRevealed] = useState(false);
   const { addToast } = useToast();
 
-  const handleSubmit = (isTrue) => { setGuess(isTrue); setRevealed(true); if (isTrue === Q.answer) addToast('+2 XP — Calibration correct!', 'xp'); };
-  const isCorrect = guess === Q.answer;
+  useEffect(() => {
+    ConfigLoader.calibration().then((cfg) => setQuestions(cfg.questions));
+  }, []);
+
+  const q = questions[qIdx];
+
+  const handleSubmit = (isTrue) => {
+    setGuess(isTrue);
+    setRevealed(true);
+    if (q && isTrue === q.answer) addToast('+2 XP — Calibration correct!', 'xp');
+  };
+
+  const refresh = useCallback(() => {
+    if (questions.length === 0) return;
+    setQIdx((prev) => pickRandom(questions, prev));
+    setConfidence(null);
+    setGuess(null);
+    setRevealed(false);
+  }, [questions]);
+
+  if (!q) return null;
+
+  const isCorrect = guess === q.answer;
 
   return (
     <Card className="relative overflow-hidden">
       <div className="absolute -right-8 -bottom-8 h-24 w-24 rounded-full bg-cyan-500/8 blur-2xl" />
-      <CardHeader title="Calibration" icon={Target} subtitle="How sure are you?" />
-      <p className="mb-3 text-sm t-secondary">"{Q.statement}"</p>
+      <CardHeader title="Calibration" icon={Target} subtitle="How sure are you?"
+        action={
+          <button onClick={refresh} className="rounded-lg p-1.5 t-muted hover:t-secondary transition-colors" title="New question">
+            <RefreshCw className="h-3.5 w-3.5" />
+          </button>
+        }
+      />
+      <p className="mb-3 text-sm t-secondary">"{q.statement}"</p>
       {!revealed ? (
         <>
           <div className="mb-3 flex gap-2">
@@ -46,9 +81,12 @@ export function CalibrationCard() {
           <div className="flex items-center gap-2">
             {isCorrect ? <CheckCircle className="h-5 w-5 text-emerald-400" /> : <XCircle className="h-5 w-5 text-red-400" />}
             <span className={`text-sm font-semibold ${isCorrect ? 'text-emerald-400' : 'text-red-400'}`}>{isCorrect ? 'Correct!' : 'Wrong!'}</span>
-            <span className="text-sm t-muted">— Answer: {Q.answer ? 'True' : 'False'}</span>
+            <span className="text-sm t-muted">— Answer: {q.answer ? 'True' : 'False'}</span>
           </div>
-          <p className="mt-2 text-xs t-muted">{Q.source}</p>
+          <p className="mt-2 text-xs t-muted">{q.source}</p>
+          <button onClick={refresh} className="mt-2 text-xs font-medium text-purple-400 hover:text-purple-300 transition-colors">
+            Next question →
+          </button>
         </div>
       )}
     </Card>
