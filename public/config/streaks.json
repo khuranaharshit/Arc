@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "min_daily_xp": 10,
+  "two_day_rule": true,
+  "bonuses": [
+    { "days": 3, "xp": 5 },
+    { "days": 7, "xp": 15 },
+    { "days": 14, "xp": 30 },
+    { "days": 30, "xp": 50, "achievement_key": "iron_mind" },
+    { "days": 90, "xp": 100, "achievement_key": "diamond_mind" }
+  ]
+}

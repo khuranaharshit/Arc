@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "estimates": [
+    { "key": "fermi_001", "question": "How many flights take off globally per day?", "answer": "~100,000", "justification": "~4 billion passengers/year ÷ 365 days ÷ ~100 passengers/flight ≈ 110,000 flights/day. Actual: ~100,000.", "difficulty": 2 },
+    { "key": "fermi_002", "question": "How much does the atmosphere weigh?", "answer": "~5.15 × 10^18 kg", "justification": "Atmospheric pressure ~101,325 Pa. Earth surface ≈ 5.1 × 10^14 m². Weight = P × A ≈ 5.17 × 10^19 N → mass ≈ 5.15 × 10^18 kg.", "difficulty": 3 }
+  ]
+}

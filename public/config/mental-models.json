@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "models": [
+    { "name": "Survivorship Bias", "wiki": "Survivorship_bias" },
+    { "name": "Dunning-Kruger Effect", "wiki": "Dunning–Kruger_effect" },
+    { "name": "Sunk Cost Fallacy", "wiki": "Sunk_cost" },
+    { "name": "Confirmation Bias", "wiki": "Confirmation_bias" },
+    { "name": "First Principles Thinking", "wiki": "First_principle" },
+    { "name": "Occam's Razor", "wiki": "Occam%27s_razor" },
+    { "name": "Pareto Principle", "wiki": "Pareto_principle" },
+    { "name": "Inversion", "wiki": "Inversion_(logic)" },
+    { "name": "Second-Order Thinking", "wiki": "Second-order_thinking" },
+    { "name": "Hanlon's Razor", "wiki": "Hanlon%27s_razor" },
+    { "name": "Circle of Competence", "wiki": "Circle_of_competence" },
+    { "name": "Availability Heuristic", "wiki": "Availability_heuristic" },
+    { "name": "Anchoring Effect", "wiki": "Anchoring_(cognitive_bias)" },
+    { "name": "Regression to the Mean", "wiki": "Regression_toward_the_mean" },
+    { "name": "Bayes' Theorem", "wiki": "Bayes%27_theorem" },
+    { "name": "Opportunity Cost", "wiki": "Opportunity_cost" },
+    { "name": "Compounding", "wiki": "Compound_interest" },
+    { "name": "Margin of Safety", "wiki": "Margin_of_safety" },
+    { "name": "Antifragility", "wiki": "Antifragility" },
+    { "name": "Lindy Effect", "wiki": "Lindy_effect" }
+  ]
+}

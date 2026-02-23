@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "questions": [
+    { "key": "cal_001", "statement": "The Great Wall of China is visible from space with the naked eye", "answer": false, "source": "NASA has confirmed it's not visible from low Earth orbit without aid" },
+    { "key": "cal_002", "statement": "An octopus has three hearts", "answer": true, "source": "Two branchial hearts pump blood to the gills, one systemic heart pumps it to the body" }
+  ]
+}

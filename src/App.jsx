@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { ToastProvider } from './context/ToastContext';
+import { DataProvider } from './context/DataContext';
 import { AppShell } from './components/layout/AppShell';
 import { Dashboard } from './components/dashboard/Dashboard';
 import { ActivityMenu } from './components/activities/ActivityMenu';
@@ -24,29 +25,31 @@ export default function App() {
   return (
     <ThemeProvider>
       <ToastProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<AppShell />}>
-              <Route index element={<Dashboard />} />
-              <Route path="log" element={<ActivityMenu />} />
-              <Route path="games" element={<GameHub />} />
-              <Route path="games/:gameType" element={<GameSession />} />
-              <Route path="stats" element={<StatsPage />} />
-              <Route path="review" element={<WeeklyReview />} />
-              <Route path="reading" element={<ReadingList />} />
-              <Route path="achievements" element={<AchievementList />} />
-              <Route path="tracking/habits" element={<HabitTracker />} />
-              <Route path="tracking/mood" element={<MoodLogger />} />
-              <Route path="tracking/goals" element={<GoalsBoard />} />
-              <Route path="tracking/journal" element={<JournalPage />} />
-              <Route path="tracking/people" element={<PeoplePage />} />
-              <Route path="tracking/finance" element={<FinancePulse />} />
-              <Route path="tracking/travel" element={<TravelLog />} />
-              <Route path="export" element={<ExportPage />} />
-              <Route path="settings" element={<SettingsPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <DataProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<AppShell />}>
+                <Route index element={<Dashboard />} />
+                <Route path="log" element={<ActivityMenu />} />
+                <Route path="games" element={<GameHub />} />
+                <Route path="games/:gameType" element={<GameSession />} />
+                <Route path="stats" element={<StatsPage />} />
+                <Route path="review" element={<WeeklyReview />} />
+                <Route path="reading" element={<ReadingList />} />
+                <Route path="achievements" element={<AchievementList />} />
+                <Route path="tracking/habits" element={<HabitTracker />} />
+                <Route path="tracking/mood" element={<MoodLogger />} />
+                <Route path="tracking/goals" element={<GoalsBoard />} />
+                <Route path="tracking/journal" element={<JournalPage />} />
+                <Route path="tracking/people" element={<PeoplePage />} />
+                <Route path="tracking/finance" element={<FinancePulse />} />
+                <Route path="tracking/travel" element={<TravelLog />} />
+                <Route path="export" element={<ExportPage />} />
+                <Route path="settings" element={<SettingsPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </DataProvider>
       </ToastProvider>
     </ThemeProvider>
   );

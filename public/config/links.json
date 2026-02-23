@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "links": [
+    { "key": "apple_health", "label": "Health Activity - Apple", "url": "https://www.apple.com/health/", "icon": "heart", "category": "health" },
+    { "key": "brilliant", "label": "Brilliant.org", "url": "https://brilliant.org", "icon": "brain", "category": "learning" },
+    { "key": "lichess", "label": "Lichess", "url": "https://lichess.org", "icon": "trophy", "category": "games" },
+    { "key": "leetcode", "label": "LeetCode", "url": "https://leetcode.com", "icon": "code", "category": "learning" },
+    { "key": "project_euler", "label": "Project Euler", "url": "https://projecteuler.net", "icon": "calculator", "category": "learning" },
+    { "key": "paul_graham", "label": "Paul Graham Essays", "url": "https://paulgraham.com", "icon": "book-open", "category": "reading" },
+    { "key": "farnam_street", "label": "Farnam Street", "url": "https://fs.blog", "icon": "compass", "category": "reading" }
+  ]
+}

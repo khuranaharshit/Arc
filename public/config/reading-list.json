@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "books": [
+    { "key": "deep_work", "title": "Deep Work", "author": "Cal Newport", "order": 1, "audiobook": true, "url": "https://www.amazon.com/dp/1455586692" },
+    { "key": "thinking_fast_slow", "title": "Thinking, Fast and Slow", "author": "Daniel Kahneman", "order": 2, "audiobook": true, "url": "https://www.amazon.com/dp/0374533555" },
+    { "key": "scout_mindset", "title": "The Scout Mindset", "author": "Julia Galef", "order": 3, "audiobook": true, "url": "https://www.amazon.com/dp/0735217556" },
+    { "key": "why_we_sleep", "title": "Why We Sleep", "author": "Matthew Walker", "order": 4, "audiobook": true, "url": "https://www.amazon.com/dp/1501144316" },
+    { "key": "how_to_solve_it", "title": "How to Solve It", "author": "George Polya", "order": 5, "audiobook": false, "url": "https://www.amazon.com/dp/069116407X" },
+    { "key": "never_split", "title": "Never Split the Difference", "author": "Chris Voss", "order": 6, "audiobook": true, "url": "https://www.amazon.com/dp/0062407805" },
+    { "key": "superforecasting", "title": "Superforecasting", "author": "Philip Tetlock", "order": 7, "audiobook": true, "url": "https://www.amazon.com/dp/0804136718" },
+    { "key": "poor_charlies", "title": "Poor Charlie's Almanack", "author": "Charlie Munger", "order": 8, "audiobook": false, "url": "https://www.amazon.com/dp/1578645018" },
+    { "key": "antifragile", "title": "Antifragile", "author": "Nassim Taleb", "order": 9, "audiobook": true, "url": "https://www.amazon.com/dp/0812979680" },
+    { "key": "outlive", "title": "Outlive", "author": "Peter Attia", "order": 10, "audiobook": true, "url": "https://www.amazon.com/dp/0593236599" },
+    { "key": "range", "title": "Range", "author": "David Epstein", "order": 11, "audiobook": true, "url": "https://www.amazon.com/dp/0735214484" },
+    { "key": "naval", "title": "The Almanack of Naval Ravikant", "author": "Eric Jorgenson", "order": 12, "audiobook": true, "url": "https://www.navalmanack.com" }
+  ]
+}

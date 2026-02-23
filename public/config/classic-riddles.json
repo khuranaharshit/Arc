@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "riddles": [
+    {
+      "key": "riddle_001",
+      "type": "knights_and_knaves",
+      "setup": "You meet two people at a fork. One always tells the truth, one always lies. You can ask ONE question to find the right path.",
+      "question": "What question do you ask?",
+      "answer": "Ask either: 'If I asked the other person which path is correct, what would they say?' Then take the opposite path.",
+      "explanation": "Both liars and truth-tellers will point to the wrong path with this question. The liar lies about what the truth-teller would say. The truth-teller truthfully reports the liar's lie.",
+      "difficulty": 2
+    }
+  ]
+}

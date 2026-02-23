@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "categories": {
+    "cognitive": [
+      "What's one thing I believed yesterday that might be wrong?",
+      "If I had to bet money on my current project succeeding, what odds would I give? Why?",
+      "What's a question I should be asking that I'm not?"
+    ],
+    "intentionality": [
+      "What is the ONE thing that matters most today?",
+      "What am I avoiding? Why?",
+      "If today repeated for a year, where would I end up?"
+    ],
+    "empathy": [
+      "Who in my life needs something from me that I haven't given?",
+      "What would the person I disagree with say their strongest argument is?",
+      "When did I last genuinely ask someone how they're doing and listen?"
+    ],
+    "ai_awareness": [
+      "What did I use AI for yesterday? Did I verify the output?",
+      "What's one thing I relied on AI for that I should be able to do myself?",
+      "What's one thing I did manually that AI could have handled better?"
+    ]
+  },
+  "daily_count": 2
+}

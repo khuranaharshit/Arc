@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "achievements": [
+    { "key": "first_blood", "name": "First Blood", "description": "Hit 10 XP in a single day for the first time", "icon": "zap", "condition": { "type": "daily_xp_gte", "value": 10, "count": 1 } },
+    { "key": "bookworm_i", "name": "Bookworm I", "description": "Finish your 1st book", "icon": "book", "condition": { "type": "activity_count", "activity_key": "finish_book", "value": 1 } },
+    { "key": "bookworm_iii", "name": "Bookworm III", "description": "Finish 3 books", "icon": "book", "condition": { "type": "activity_count", "activity_key": "finish_book", "value": 3 } },
+    { "key": "bookworm_xii", "name": "Bookworm XII", "description": "Finish 12 books", "icon": "library", "condition": { "type": "activity_count", "activity_key": "finish_book", "value": 12 } },
+    { "key": "iron_mind", "name": "Iron Mind", "description": "30-day streak", "icon": "flame", "condition": { "type": "streak_gte", "value": 30 } },
+    { "key": "diamond_mind", "name": "Diamond Mind", "description": "90-day streak", "icon": "diamond", "condition": { "type": "streak_gte", "value": 90 } },
+    { "key": "logic_i", "name": "Logic I", "description": "Solve 10 LeetCode/Project Euler problems", "icon": "cpu", "condition": { "type": "activity_count", "activity_key": "leetcode_problem", "value": 10 } },
+    { "key": "logic_iii", "name": "Logic III", "description": "Solve 50 problems", "icon": "cpu", "condition": { "type": "activity_count", "activity_key": "leetcode_problem", "value": 50 } },
+    { "key": "builder", "name": "Builder", "description": "Ship 1 side project", "icon": "hammer", "condition": { "type": "activity_count", "activity_key": "shipped_something", "value": 1 } },
+    { "key": "serial_builder", "name": "Serial Builder", "description": "Ship 3 side projects", "icon": "hammer", "condition": { "type": "activity_count", "activity_key": "shipped_something", "value": 3 } },
+    { "key": "ai_skeptic", "name": "AI Skeptic", "description": "Catch 10 AI errors", "icon": "shield-alert", "condition": { "type": "activity_count", "activity_key": "ai_error_caught", "value": 10 } },
+    { "key": "writer_i", "name": "Writer I", "description": "Publish 4 pieces", "icon": "pen-tool", "condition": { "type": "activity_count", "activity_key": "write_publish", "value": 4 } },
+    { "key": "writer_iii", "name": "Writer III", "description": "Publish 12 pieces", "icon": "pen-tool", "condition": { "type": "activity_count", "activity_key": "write_publish", "value": 12 } },
+    { "key": "ghost_mode", "name": "Ghost Mode", "description": "7 days with screen time under 2 hrs", "icon": "ghost", "condition": { "type": "consecutive_activity", "activity_key": "screen_time_low", "value": 7 } },
+    { "key": "monk_mode", "name": "Monk Mode", "description": "30 days no social media", "icon": "eye-off", "condition": { "type": "consecutive_activity", "activity_key": "no_social_media", "value": 30 } },
+    { "key": "level_5", "name": "Level 5", "description": "Sustain 200+ XP/week for 4 consecutive weeks", "icon": "crown", "condition": { "type": "level_gte", "value": 5 } },
+    { "key": "year_one", "name": "Year One", "description": "Complete 52 weekly reviews", "icon": "calendar", "condition": { "type": "review_count", "value": 52 } }
+  ]
+}

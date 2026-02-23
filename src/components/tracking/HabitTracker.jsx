@@ -1,99 +1,77 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CheckSquare, Plus } from 'lucide-react';
 import { Card, CardHeader } from '../common/Card';
+import { useData } from '../../context/DataContext';
 import { useToast } from '../../context/ToastContext';
 
-const INITIAL_HABITS = [
-  { key: 'drink_water', label: 'Drink 2L water', icon: '💧', checked: false },
-  { key: 'meditate', label: 'Meditate 10 min', icon: '🧘', checked: false },
-  { key: 'vitamins', label: 'Take vitamins', icon: '💊', checked: false },
-  { key: 'no_snooze', label: 'No snooze alarm', icon: '⏰', checked: false },
-  { key: 'stretch', label: 'Morning stretch', icon: '🙆', checked: false },
+const DEFAULT_HABITS = [
+  { key: 'drink_water', label: 'Drink 2L water', icon: '💧' },
+  { key: 'meditate', label: 'Meditate 10 min', icon: '🧘' },
+  { key: 'vitamins', label: 'Take vitamins', icon: '💊' },
+  { key: 'no_snooze', label: 'No snooze alarm', icon: '⏰' },
+  { key: 'stretch', label: 'Morning stretch', icon: '🙆' },
 ];
 
 export function HabitTracker() {
-  const [habits, setHabits] = useState(INITIAL_HABITS);
+  const { habitDAO } = useData();
   const { addToast } = useToast();
+  const [habits, setHabits] = useState([]);
+  const [todayLog, setTodayLog] = useState({});
 
-  const toggleHabit = (key) => {
-    setHabits((prev) =>
-      prev.map((h) => {
-        if (h.key !== key) return h;
-        const next = !h.checked;
-        if (next) addToast(`${h.icon} ${h.label} — done!`, 'success');
-        return { ...h, checked: next };
-      }),
-    );
+  useEffect(() => {
+    async function load() {
+      let defs = await habitDAO.getHabits();
+      if (defs.length === 0) {
+        // Initialize with defaults
+        for (const h of DEFAULT_HABITS) {
+          await habitDAO.addHabit(h.key, h.label, h.icon);
+        }
+        defs = await habitDAO.getHabits();
+      }
+      setHabits(defs);
+      setTodayLog(await habitDAO.getTodayLog());
+    }
+    load();
+  }, [habitDAO]);
+
+  const toggle = async (key) => {
+    const newVal = await habitDAO.toggleHabit(key);
+    setTodayLog((prev) => ({ ...prev, [key]: newVal }));
+    if (newVal) {
+      const h = habits.find((x) => x.key === key);
+      addToast(`${h?.icon || '✅'} ${h?.label || key} — done!`, 'success');
+    }
   };
 
-  const doneCount = habits.filter((h) => h.checked).length;
+  const doneCount = Object.values(todayLog).filter(Boolean).length;
 
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Habits</h1>
-          <p className="text-sm text-white/30">
-            {doneCount}/{habits.length} done today
-          </p>
+          <h1 className="text-2xl font-bold t-primary">Habits</h1>
+          <p className="text-sm t-muted">{doneCount}/{habits.length} done today</p>
         </div>
-        <button className="btn-ghost">
-          <Plus className="h-4 w-4" /> Add
-        </button>
       </div>
 
       <div className="space-y-2">
-        {habits.map((habit) => (
-          <Card key={habit.key} hover onClick={() => toggleHabit(habit.key)} className="cursor-pointer">
-            <div className="flex items-center gap-3">
-              <button
-                className={`flex h-8 w-8 items-center justify-center rounded-xl border transition-all ${
-                  habit.checked
-                    ? 'border-emerald-500/40 bg-emerald-500/20 text-emerald-400'
-                    : 'border-white/10 bg-white/5 text-white/20 hover:border-white/20'
-                }`}
-              >
-                {habit.checked && <CheckSquare className="h-4 w-4" />}
-              </button>
-              <span className="text-lg">{habit.icon}</span>
-              <span
-                className={`text-sm font-medium transition-all ${
-                  habit.checked ? 'text-white/30 line-through' : 'text-white/70'
-                }`}
-              >
-                {habit.label}
-              </span>
-            </div>
-          </Card>
-        ))}
-      </div>
-
-      {/* Weekly calendar */}
-      <Card>
-        <CardHeader title="This Week" icon={CheckSquare} />
-        <div className="flex gap-2">
-          {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => {
-            const done = i < 5;
-            const isToday = i === 5;
-            return (
-              <div key={i} className="flex flex-1 flex-col items-center gap-1">
-                <span className={`text-[10px] font-medium ${isToday ? 'text-purple-400' : 'text-white/25'}`}>
-                  {day}
-                </span>
-                <div
-                  className={`h-8 w-8 rounded-xl transition-all ${
-                    done
-                      ? 'bg-emerald-500/20 border border-emerald-500/30'
-                      : isToday
-                        ? 'bg-purple-500/20 border border-purple-500/30 animate-pulse-glow'
-                        : 'bg-white/5 border border-white/5'
-                  }`}
-                />
+        {habits.map((habit) => {
+          const done = !!todayLog[habit.key];
+          return (
+            <Card key={habit.key} hover onClick={() => toggle(habit.key)} className="cursor-pointer">
+              <div className="flex items-center gap-3">
+                <button className={`flex h-8 w-8 items-center justify-center rounded-xl border transition-all ${
+                  done ? 'border-emerald-500/40 bg-emerald-500/20 text-emerald-400' : 't-faint'
+                }`} style={!done ? { borderColor: 'var(--color-border)', background: 'var(--color-surface-row)' } : {}}>
+                  {done && <CheckSquare className="h-4 w-4" />}
+                </button>
+                <span className="text-lg">{habit.icon}</span>
+                <span className={`text-sm font-medium transition-all ${done ? 't-muted line-through' : 't-secondary'}`}>{habit.label}</span>
               </div>
-            );
-          })}
-        </div>
-      </Card>
+            </Card>
+          );
+        })}
+      </div>
     </div>
   );
 }
