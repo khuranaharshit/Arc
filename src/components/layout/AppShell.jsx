@@ -5,7 +5,7 @@ import { BottomNav } from './BottomNav';
 
 export function AppShell() {
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen" style={{ background: 'var(--color-bg)' }}>
       <Header />
       <Sidebar />
       <main className="pt-14 pb-20 md:pb-6 md:pl-56">

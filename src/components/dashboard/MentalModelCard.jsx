@@ -1,7 +1,6 @@
 import { Compass, ExternalLink } from 'lucide-react';
 import { Card, CardHeader } from '../common/Card';
 
-// Mock — will be replaced by mental-models config + Wikipedia API
 const MOCK_MODEL = {
   name: 'Inversion',
   summary:
@@ -10,23 +9,19 @@ const MOCK_MODEL = {
 };
 
 export function MentalModelCard() {
-  const model = MOCK_MODEL;
-
   return (
-    <Card>
+    <Card className="relative overflow-hidden">
+      <div className="absolute -right-6 -bottom-6 h-20 w-20 rounded-full bg-indigo-500/8 blur-2xl" />
       <CardHeader title="Mental Model" icon={Compass} subtitle="Think better" />
-
-      <h4 className="mb-1 text-sm font-bold text-slate-100">{model.name}</h4>
-      <p className="text-xs leading-relaxed text-slate-400">{model.summary}</p>
-
+      <h4 className="mb-1 text-sm font-bold text-white/90">{MOCK_MODEL.name}</h4>
+      <p className="text-xs leading-relaxed text-white/40">{MOCK_MODEL.summary}</p>
       <a
-        href={model.wikiUrl}
+        href={MOCK_MODEL.wikiUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary hover:text-primary-light"
+        className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-purple-400 hover:text-purple-300 transition-colors"
       >
-        Learn more
-        <ExternalLink className="h-3 w-3" />
+        Learn more <ExternalLink className="h-3 w-3" />
       </a>
     </Card>
   );

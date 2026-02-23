@@ -1,7 +1,6 @@
 import { Lightbulb, ExternalLink } from 'lucide-react';
 import { Card, CardHeader } from '../common/Card';
 
-// Mock — will be replaced by Wikipedia API
 const MOCK_FACT = {
   title: 'Survivorship Bias',
   extract:
@@ -10,23 +9,19 @@ const MOCK_FACT = {
 };
 
 export function DidYouKnow() {
-  const fact = MOCK_FACT;
-
   return (
-    <Card>
+    <Card className="relative overflow-hidden">
+      <div className="absolute -left-6 -top-6 h-20 w-20 rounded-full bg-amber-500/8 blur-2xl" />
       <CardHeader title="Did You Know?" icon={Lightbulb} subtitle="Daily discovery" />
-
-      <h4 className="mb-1 text-sm font-bold text-slate-100">{fact.title}</h4>
-      <p className="text-xs leading-relaxed text-slate-400">{fact.extract}</p>
-
+      <h4 className="mb-1 text-sm font-bold text-white/90">{MOCK_FACT.title}</h4>
+      <p className="text-xs leading-relaxed text-white/40">{MOCK_FACT.extract}</p>
       <a
-        href={fact.url}
+        href={MOCK_FACT.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary hover:text-primary-light"
+        className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-purple-400 hover:text-purple-300 transition-colors"
       >
-        Read more
-        <ExternalLink className="h-3 w-3" />
+        Read more <ExternalLink className="h-3 w-3" />
       </a>
     </Card>
   );

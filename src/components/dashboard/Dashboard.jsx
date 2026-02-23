@@ -8,26 +8,29 @@ import { CalibrationCard } from './CalibrationCard';
 import { MentalModelCard } from './MentalModelCard';
 import { RecentActivity } from './RecentActivity';
 
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour < 12) return 'Good morning';
+  if (hour < 17) return 'Good afternoon';
+  return 'Good evening';
+}
+
 export function Dashboard() {
   return (
-    <div className="space-y-6">
-      {/* Greeting */}
+    <div className="space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-2xl font-bold text-slate-50">Good morning</h1>
-        <p className="text-sm text-slate-400">Let's earn some XP today.</p>
+        <h1 className="text-2xl font-bold text-white">{getGreeting()}</h1>
+        <p className="text-sm text-white/30">Let's earn some XP today.</p>
       </div>
 
-      {/* Top row: XP + Streak + Level */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <TodayXP />
         <StreakCard />
         <LevelCard />
       </div>
 
-      {/* Quick log */}
       <QuickLog />
 
-      {/* Knowledge & puzzles row */}
       <div className="grid gap-4 sm:grid-cols-2">
         <BrainBite />
         <CalibrationCard />
@@ -38,7 +41,6 @@ export function Dashboard() {
         <MentalModelCard />
       </div>
 
-      {/* Recent activity */}
       <RecentActivity />
     </div>
   );
