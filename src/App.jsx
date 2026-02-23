@@ -7,6 +7,7 @@ import { AppShell } from './components/layout/AppShell';
 import { LoginScreen } from './components/auth/LoginScreen';
 import { Dashboard } from './components/dashboard/Dashboard';
 import { ActivityMenu } from './components/activities/ActivityMenu';
+import { ActivityHistory } from './components/activities/ActivityHistory';
 import { GameHub } from './components/games/GameHub';
 import { GameSession } from './components/games/GameSession';
 import { StatsPage } from './components/stats/StatsPage';
@@ -31,6 +32,7 @@ function AppRoutes() {
           <Route element={<AppShell />}>
             <Route index element={<Dashboard />} />
             <Route path="log" element={<ActivityMenu />} />
+            <Route path="history" element={<ActivityHistory />} />
             <Route path="games" element={<GameHub />} />
             <Route path="games/:gameType" element={<GameSession />} />
             <Route path="stats" element={<StatsPage />} />
