@@ -1,0 +1,45 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AppShell } from './components/layout/AppShell';
+import { Dashboard } from './components/dashboard/Dashboard';
+import { ActivityMenu } from './components/activities/ActivityMenu';
+import { GameHub } from './components/games/GameHub';
+import { StatsPage } from './components/stats/StatsPage';
+import { WeeklyReview } from './components/reviews/WeeklyReview';
+import { ReadingList } from './components/reading/ReadingList';
+import { AchievementList } from './components/achievements/AchievementList';
+import { HabitTracker } from './components/tracking/HabitTracker';
+import { MoodLogger } from './components/tracking/MoodLogger';
+import { GoalsBoard } from './components/tracking/GoalsBoard';
+import { JournalPage } from './components/tracking/JournalPage';
+import { PeoplePage } from './components/tracking/PeoplePage';
+import { FinancePulse } from './components/tracking/FinancePulse';
+import { TravelLog } from './components/tracking/TravelLog';
+import { ExportPage } from './components/export/ExportPage';
+import { SettingsPage } from './components/settings/SettingsPage';
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AppShell />}>
+          <Route index element={<Dashboard />} />
+          <Route path="log" element={<ActivityMenu />} />
+          <Route path="games" element={<GameHub />} />
+          <Route path="stats" element={<StatsPage />} />
+          <Route path="review" element={<WeeklyReview />} />
+          <Route path="reading" element={<ReadingList />} />
+          <Route path="achievements" element={<AchievementList />} />
+          <Route path="tracking/habits" element={<HabitTracker />} />
+          <Route path="tracking/mood" element={<MoodLogger />} />
+          <Route path="tracking/goals" element={<GoalsBoard />} />
+          <Route path="tracking/journal" element={<JournalPage />} />
+          <Route path="tracking/people" element={<PeoplePage />} />
+          <Route path="tracking/finance" element={<FinancePulse />} />
+          <Route path="tracking/travel" element={<TravelLog />} />
+          <Route path="export" element={<ExportPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
