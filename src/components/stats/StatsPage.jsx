@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BarChart3, TrendingUp, Target, Layers } from 'lucide-react';
 import { Card, CardHeader } from '../common/Card';
+import { SkillTree } from './SkillTree';
 import { useData } from '../../context/DataContext';
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
@@ -102,6 +103,8 @@ export function StatsPage() {
           </ResponsiveContainer>
         </div>
       </Card>
+
+      <SkillTree />
     </div>
   );
 }

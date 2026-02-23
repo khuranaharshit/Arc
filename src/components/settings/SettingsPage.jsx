@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Key, Bell, Palette, Database, Shield, Sun, Moon } from 'lucide-react';
 import { Card, CardHeader } from '../common/Card';
 import { Button } from '../common/Button';
+import { ThemeSettings } from './ThemeSettings';
 import { useTheme } from '../../context/ThemeContext';
 import { useToast } from '../../context/ToastContext';
 
@@ -77,6 +78,9 @@ export function SettingsPage() {
           <Toggle on={theme === 'dark'} onChange={toggleTheme} />
         </div>
       </Card>
+
+      {/* Unlockable themes */}
+      <ThemeSettings />
 
       {/* Notifications */}
       <Card>

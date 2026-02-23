@@ -15,6 +15,7 @@ import { JournalDAO } from '../dao/JournalDAO';
 import { PeopleDAO } from '../dao/PeopleDAO';
 import { FinanceDAO } from '../dao/FinanceDAO';
 import { TravelDAO } from '../dao/TravelDAO';
+import { QuestDAO } from '../dao/QuestDAO';
 import { ConfigLoader } from '../dao/ConfigLoader';
 
 const DataContext = createContext(null);
@@ -32,38 +33,31 @@ export function DataProvider({ children }) {
 
       if (import.meta.env.DEV) {
         const devStorage = new DevStorage('http://localhost:3001');
-        const devAvailable = await devStorage.isAvailable();
-        if (devAvailable) {
+        if (await devStorage.isAvailable()) {
           remoteStorage = devStorage;
           setStorageMode('dev');
-          console.log('[Arc] Dev storage server detected — syncing to ./data/ files');
         }
       }
 
       const syncEngine = new SyncEngine(localCache, remoteStorage);
-      if (remoteStorage) {
-        try { await syncEngine.fullPull(); } catch (err) { console.warn('[Arc] Pull failed:', err); }
-      }
-
-      const activityDAO = new ActivityDAO(localCache, syncEngine);
-      const streakDAO = new StreakDAO(localCache, syncEngine);
-      const levelDAO = new LevelDAO(localCache, syncEngine);
-      const achievementDAO = new AchievementDAO(localCache, syncEngine);
-      const reviewDAO = new ReviewDAO(localCache, syncEngine);
-      const readingListDAO = new ReadingListDAO(localCache, syncEngine);
-      const habitDAO = new HabitDAO(localCache, syncEngine);
-      const moodDAO = new MoodDAO(localCache, syncEngine);
-      const goalDAO = new GoalDAO(localCache, syncEngine);
-      const journalDAO = new JournalDAO(localCache, syncEngine);
-      const peopleDAO = new PeopleDAO(localCache, syncEngine);
-      const financeDAO = new FinanceDAO(localCache, syncEngine);
-      const travelDAO = new TravelDAO(localCache, syncEngine);
+      if (remoteStorage) { try { await syncEngine.fullPull(); } catch {} }
 
       daosRef.current = {
         localCache, syncEngine,
-        activityDAO, streakDAO, levelDAO, achievementDAO,
-        reviewDAO, readingListDAO, habitDAO,
-        moodDAO, goalDAO, journalDAO, peopleDAO, financeDAO, travelDAO,
+        activityDAO: new ActivityDAO(localCache, syncEngine),
+        streakDAO: new StreakDAO(localCache, syncEngine),
+        levelDAO: new LevelDAO(localCache, syncEngine),
+        achievementDAO: new AchievementDAO(localCache, syncEngine),
+        reviewDAO: new ReviewDAO(localCache, syncEngine),
+        readingListDAO: new ReadingListDAO(localCache, syncEngine),
+        habitDAO: new HabitDAO(localCache, syncEngine),
+        moodDAO: new MoodDAO(localCache, syncEngine),
+        goalDAO: new GoalDAO(localCache, syncEngine),
+        journalDAO: new JournalDAO(localCache, syncEngine),
+        peopleDAO: new PeopleDAO(localCache, syncEngine),
+        financeDAO: new FinanceDAO(localCache, syncEngine),
+        travelDAO: new TravelDAO(localCache, syncEngine),
+        questDAO: new QuestDAO(localCache, syncEngine),
       };
 
       const [xpMenu, levels, streaks, achievements, readingList, nudges] = await Promise.all([

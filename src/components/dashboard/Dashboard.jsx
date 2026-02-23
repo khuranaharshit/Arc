@@ -1,6 +1,7 @@
 import { TodayXP } from './TodayXP';
 import { StreakCard } from './StreakCard';
 import { LevelCard } from './LevelCard';
+import { QuestCard } from './QuestCard';
 import { QuickLog } from './QuickLog';
 import { BrainBite } from './BrainBite';
 import { DidYouKnow } from './DidYouKnow';
@@ -23,21 +24,30 @@ export function Dashboard() {
         <h1 className="text-2xl font-bold t-primary">{getGreeting()}</h1>
         <p className="text-sm t-muted">Let's earn some XP today.</p>
       </div>
+
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <TodayXP />
         <StreakCard />
         <LevelCard />
       </div>
-      <NudgeCard />
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <QuestCard />
+        <NudgeCard />
+      </div>
+
       <QuickLog />
+
       <div className="grid gap-4 sm:grid-cols-2">
         <BrainBite />
         <CalibrationCard />
       </div>
+
       <div className="grid gap-4 sm:grid-cols-2">
         <DidYouKnow />
         <MentalModelCard />
       </div>
+
       <RecentActivity />
     </div>
   );
